@@ -1,0 +1,88 @@
+.table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: 2px;
+  border-color: grey;
+  border-collapse: collapse;
+  background-color: #f5f5f4;
+  text-align: left;
+  padding-top: 10px;
+  & .departures-table {
+    margin-bottom: 0.5rem;
+  }
+  & thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    & tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+      & th {
+        background-color: #ffd200;
+        border-top: none;
+        border-bottom: none;
+        text-transform: uppercase;
+        letter-spacing: 1.28px;
+        vertical-align: bottom;
+        padding: 0.75rem;
+        display: table-cell;
+        font-weight: bold;
+      }
+
+      & th:first-child {
+        padding-left: 1.5rem !important;
+      }
+      & th:last-child {
+        padding-left: 1.5rem !important;
+        text-align: right;
+      }
+    }
+  }
+  & tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+
+    & tr {
+      display: table-row !important;
+      border-bottom: 1px solid #8a8b8a;
+      vertical-align: inherit;
+      border-color: inherit;
+
+      & td {
+        font-weight: 700;
+        font-size: 1.4375rem !important;
+        margin-bottom: -0.8px !important;
+        border: none;
+        margin-bottom: -0.8px !important;
+        border: none;
+        padding: 0.75rem;
+        width: 845px;
+      }
+      & .route-number {
+        padding-left: 1.5rem !important;
+        width: 140px;
+        margin-right: 0.5rem !important;
+      }
+      & .route-name {
+        width: 845px;
+      }
+      & .depart-time {
+        padding-left: 1.5rem !important;
+        width: 200px;
+        text-align: right;
+      }
+    }
+  }
+}
+.stop-name {
+  font-size: 32px;
+  font-weight: 700;
+}
+.stop-number {
+  margin-left: auto;
+  display: block;
+}

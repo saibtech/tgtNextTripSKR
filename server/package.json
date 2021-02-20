@@ -1,0 +1,45 @@
+{
+  "name": "targetgraphql",
+  "version": "1.0.0",
+  "description": "Graphql Server for Next Trip",
+  "main": "server.js",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules ./server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-datasource-rest": "^0.10.0",
+    "apollo-server": "^2.21.0",
+    "class-validator": "^0.13.1",
+    "graphql": "^15.5.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "apollo-datasource-rest": "^0.9.0",
+    "apollo-server-koa": "^2.13.1",
+    "apollo-server-types": "^0.4.0",
+    "class-validator": "^0.12.2",
+    "eslint": "^7.20.0",
+    "eslint-config-standard-with-typescript": "^18.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "graphql": "15.3.0",
+    "json-schema": "^0.2.5",
+    "koa": "^2.11.0",
+    "lint-staged": "^10.0.8",
+    "nodemon": "^2.0.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "type-graphql": "^1.0.0-rc.2",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.25",
+    "typescript": "^3.9.6"
+  }
+}

@@ -1,0 +1,30 @@
+{
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"strictPropertyInitialization": false,
+	"compilerOptions": {
+		"target": "es2019",
+		"module": "commonjs",
+		"lib": [
+			"es2018",
+			"esnext.asynciterable"
+		],
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
+		"moduleResolution": "node",
+		"strict": true,
+		"strictNullChecks": true,
+		"forceConsistentCasingInFileNames": true,
+		"useDefineForClassFields": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true,
+		"declaration": true,
+		"typeRoots": [
+			"./node_modules/@types"
+		]
+	}
+}
