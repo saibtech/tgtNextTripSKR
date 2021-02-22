@@ -1,6 +1,6 @@
-import { FaWifi } from "react-icons/fa"
+import { FaWifi } from 'react-icons/fa'
 import styled, { keyframes } from 'styled-components'
-import NextTripImg from "../assets/images/nextrip.jpg"
+import NextTripImg from '../assets/images/nextrip.jpg'
 
 export const PageContainer = styled.section`
 margin-right: auto;
@@ -29,7 +29,6 @@ export const StyledWifi = styled(FaWifi)`
   animation-iteration-count: infinite;
   margin:auto;
 `
-
 
 export const StopDescription = styled.div`
       display: flex;

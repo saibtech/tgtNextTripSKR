@@ -39,7 +39,7 @@ export const DepartureFragment = gql`
     }
 `
 
-export const Get_Routes = gql`
+export const GET_ROUTES = gql`
     query getRoutes {
         getRoutes {
             ...Route
@@ -48,7 +48,7 @@ export const Get_Routes = gql`
     ${RouteFragment}
 `
 
-export const Get_Direction = gql`
+export const GET_DIRECTION = gql`
     query getDirection($route_id: Int) {
         getDirection (route_id: $route_id) {
             ...Direction
@@ -57,7 +57,7 @@ export const Get_Direction = gql`
     ${DirectionFragment}
 `
 
-export const Get_Stops = gql`
+export const GET_STOPS = gql`
     query getDirectionStops ($direction_id: Int, $route_id: Int) {
         getDirectionStops (route_id: $route_id, direction_id: $direction_id) {
             ...Stops

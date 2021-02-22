@@ -1,23 +1,23 @@
+/* eslint-disable camelcase */
 import { useLazyQuery, useQuery } from '@apollo/client'
 import React, { Fragment, useReducer } from 'react'
-import Select from "../components/Select"
-import { GetDepartureStops, Get_Direction, Get_Routes, Get_Stops } from "../graphql/routes"
+import Select from '../components/Select'
+import { GetDepartureStops, GET_DIRECTION, GET_ROUTES, GET_STOPS } from '../graphql/routes'
 import { stateReducer } from '../utils'
-import { Card, CustomSelect, PageContainer, SelectContainer, StopDescription, StyledWifi } from "./styles"
-import "./table.scss"
+import { Card, CustomSelect, PageContainer, SelectContainer, StopDescription, StyledWifi } from './styles'
+import './table.scss'
 
 const Home = () => {
-  const { loading, data, error } = useQuery(Get_Routes)
-  const [getDirection, { loading: directionLoading, data: directionData, error: directionError }] = useLazyQuery(Get_Direction)
-  const [getStops, { loading: stopsLoading, data: stopsData, error: stopsError }] = useLazyQuery(Get_Stops)
+  const { loading, data } = useQuery(GET_ROUTES)
+  const [getDirection, { loading: directionLoading, data: directionData }] = useLazyQuery(GET_DIRECTION)
+  const [getStops, { data: stopsData }] = useLazyQuery(GET_STOPS)
   const [getDepartureStops, { loading: departureStopsLoading, data: departureStopsData }] = useLazyQuery(GetDepartureStops)
   const initialState = {
-    route: null, 
-    direction: null, 
+    route: null,
+    direction: null,
     stop: null
   }
-  const [{ route, direction, stop}, dispatch] = useReducer(stateReducer, initialState)
-
+  const [{ route, direction, stop }, dispatch] = useReducer(stateReducer, initialState)
 
   const getRoutesSelection = () => data.getRoutes.reduce((accum, curr) => {
     accum[curr.route_id] = curr.route_label
@@ -34,17 +34,17 @@ const Home = () => {
   const onChangeRoute = (id) => {
     if (id !== route) {
       getDirection({ variables: { route_id: parseInt(id) } })
-      dispatch({ type: "MERGE", route: id, direction: null, stop: null})
+      dispatch({ type: 'MERGE', route: id, direction: null, stop: null })
     }
   }
   const onChangeDirection = (id) => {
     getStops({ variables: { route_id: parseInt(route), direction_id: parseInt(id) } })
-    dispatch({ type: "MERGE", direction: id, stop: null})
+    dispatch({ type: 'MERGE', direction: id, stop: null })
   }
 
   const onChangeStops = (id) => {
     getDepartureStops({ variables: { route_id: parseInt(route), direction_id: parseInt(direction), place_code: id } })
-    dispatch({ type: "MERGE", stop: id})
+    dispatch({ type: 'MERGE', stop: id })
   }
 
   const getDepartureData = () => !departureStopsLoading && departureStopsData?.getDepartureStops?.departures?.map(elem => {
@@ -54,44 +54,42 @@ const Home = () => {
       departure_text: elem.departure_text,
       actual: elem.actual
     }
-
   })
 
   return (
     <Fragment>
       <PageContainer>
         <Card>
-          <div style={{padding: "20px"}}>
+          <div style={{ padding: '20px' }}>
 
-          
-            <h2 style={{ textAlign: "center", fontSize:"32px", fontWeight: "700"}}>Real-time Departures</h2>
-        {loading ? <div>Loading....</div> :
-               
-            <SelectContainer>
-              <CustomSelect>
-                  <Select style={{ margin: "0 auto 1rem" }} items={getRoutesSelection()} selection={getRoutesSelection()[route]} action={onChangeRoute} />
-              </CustomSelect>
-                            <CustomSelect>
-              {route ? directionLoading ? <div>Loading...</div> : directionData && <Select items={getDirectionSelection()} selection={getDirectionSelection()[direction]} action={onChangeDirection} /> : null}
+            <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: '700' }}>Real-time Departures</h2>
+            {loading ? <div>Loading....</div>
 
-                            </CustomSelect>
+              : <SelectContainer>
+                <CustomSelect>
+                  <Select style={{ margin: '0 auto 1rem' }} items={getRoutesSelection()} selection={getRoutesSelection()[route]} action={onChangeRoute} />
+                </CustomSelect>
+                <CustomSelect>
+                  {route ? directionLoading ? <div>Loading...</div> : directionData && <Select items={getDirectionSelection()} selection={getDirectionSelection()[direction]} action={onChangeDirection} /> : null}
 
-              <CustomSelect>
-              {stopsData?.getDirectionStops && < Select items={getStopsSelection()} selection={getStopsSelection()[stop]} action={onChangeStops} />}
+                </CustomSelect>
 
-              </CustomSelect>
-          </SelectContainer>
-        }
-        {
+                <CustomSelect>
+                  {stopsData?.getDirectionStops && < Select items={getStopsSelection()} selection={getStopsSelection()[stop]} action={onChangeStops} />}
 
-          stop && departureStopsData && 
+                </CustomSelect>
+              </SelectContainer>
+            }
+            {
+
+              stop && departureStopsData &&
           <div>
             <StopDescription>
               <h3 className="stop-name">{getStopsSelection()[stop]}</h3>
-              <span className="stop-number"><strong style={{ fontWeight: "600", fontSize: "18px", textAlign: "center"}}>Stop #:</strong>{stop}</span>
+              <span className="stop-number"><strong style={{ fontWeight: '600', fontSize: '18px', textAlign: 'center' }}>Stop #:</strong>{stop}</span>
             </StopDescription>
             <table className="table departures-table">
-              <thead className={"table head"}>
+              <thead className={'table head'}>
                 <tr>
                   <th className="route">Route</th>
                   <th className="destination">Destination</th>
@@ -99,11 +97,11 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                {getDepartureData().map(({ route_short_name, description, departure_text, actual }) => {
-                  return <tr className="departure" style={{ display: "table-row !important" }}>
-                    <td className="route-number mr-2">{route}</td>
-                    <td className="route-name">{description}</td>
-                    <td className="depart-time ml-auto">
+                {getDepartureData().map(({ description, actual, departure_text }, index) => {
+                  return <tr key={index} indexclassName="departure" style={{ display: 'table-row !important' }}>
+                    <td key={'1'} className="route-number mr-2">{route}</td>
+                    <td key={'2'} className="route-name">{description}</td>
+                    <td key={'3'} className="depart-time ml-auto">
                       {actual && <StyledWifi />}
                       <span>{departure_text}</span></td>
                   </tr>
@@ -113,9 +111,8 @@ const Home = () => {
 
           </div>
 
-
-        }
-        </div>
+            }
+          </div>
         </Card>
       </PageContainer>
 

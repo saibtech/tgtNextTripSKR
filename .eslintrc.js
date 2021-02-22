@@ -12,6 +12,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -22,8 +23,8 @@ module.exports = {
   settings: {
     react: {
       pragma: 'React',
-      version: '16.12.0',
-    },
+      version: '16.12.0'
+    }
   },
   plugins: [
     'react'
