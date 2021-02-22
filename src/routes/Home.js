@@ -1,7 +1,8 @@
 import { useLazyQuery, useQuery } from '@apollo/client'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useReducer } from 'react'
 import Select from "../components/Select"
 import { GetDepartureStops, Get_Direction, Get_Routes, Get_Stops } from "../graphql/routes"
+import { stateReducer } from '../utils'
 import { Card, CustomSelect, PageContainer, SelectContainer, StopDescription, StyledWifi } from "./styles"
 import "./table.scss"
 
@@ -10,9 +11,13 @@ const Home = () => {
   const [getDirection, { loading: directionLoading, data: directionData, error: directionError }] = useLazyQuery(Get_Direction)
   const [getStops, { loading: stopsLoading, data: stopsData, error: stopsError }] = useLazyQuery(Get_Stops)
   const [getDepartureStops, { loading: departureStopsLoading, data: departureStopsData }] = useLazyQuery(GetDepartureStops)
-  const [route, setRoute] = useState()
-  const [direction, setDirection] = useState()
-  const [stop, setStop] = useState()
+  const initialState = {
+    route: null, 
+    direction: null, 
+    stop: null
+  }
+  const [{ route, direction, stop}, dispatch] = useReducer(stateReducer, initialState)
+
 
   const getRoutesSelection = () => data.getRoutes.reduce((accum, curr) => {
     accum[curr.route_id] = curr.route_label
@@ -29,17 +34,17 @@ const Home = () => {
   const onChangeRoute = (id) => {
     if (id !== route) {
       getDirection({ variables: { route_id: parseInt(id) } })
-      setRoute(id)
+      dispatch({ type: "MERGE", route: id, direction: null, stop: null})
     }
   }
   const onChangeDirection = (id) => {
     getStops({ variables: { route_id: parseInt(route), direction_id: parseInt(id) } })
-    setDirection(id)
+    dispatch({ type: "MERGE", direction: id, stop: null})
   }
 
   const onChangeStops = (id) => {
     getDepartureStops({ variables: { route_id: parseInt(route), direction_id: parseInt(direction), place_code: id } })
-    setStop(id)
+    dispatch({ type: "MERGE", stop: id})
   }
 
   const getDepartureData = () => !departureStopsLoading && departureStopsData?.getDepartureStops?.departures?.map(elem => {

@@ -51,10 +51,9 @@ const Header = (props) => (
     <NavBar>
       <MetroTransitLogo src={MetroTransit} />
       <NavigationLinks>
-             <Link to="/">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-        <Link to="/sample">Sample</Link>
-       
+        <Link to="/graphql">Graphql Server</Link>
       </NavigationLinks>
     </NavBar>
   </div>
