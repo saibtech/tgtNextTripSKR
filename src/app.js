@@ -1,4 +1,5 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
+import fetch from 'cross-fetch'
 import { createBrowserHistory } from 'history'
 import React from 'react'
 import { Route, Router, Switch } from 'react-router-dom'
@@ -8,7 +9,7 @@ import NextTrip from './components/NextTrip'
 import About from './routes/About'
 import Home from './routes/Home'
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({ uri: 'http://localhost:4000', fetch }),
   cache: new InMemoryCache()
 })
 
