@@ -2,10 +2,10 @@
 import { useLazyQuery, useQuery } from '@apollo/client'
 import React, { Fragment, useReducer } from 'react'
 import Select from '../components/Select'
+import Table from '../components/Table'
 import { GetDepartureStops, GET_DIRECTION, GET_ROUTES, GET_STOPS } from '../graphql/routes'
 import { stateReducer } from '../utils'
-import { Card, CustomSelect, PageContainer, SelectContainer, StopDescription, StyledWifi } from './styles'
-import './table.scss'
+import { Card, CustomSelect, PageContainer, SelectContainer, StopDescription } from './styles'
 
 const Home = () => {
   const { loading, data } = useQuery(GET_ROUTES)
@@ -51,8 +51,8 @@ const Home = () => {
     return {
       route: `${elem.route_short_name}${elem.terminal}`,
       description: elem.description,
-      departure_text: elem.departure_text,
-      actual: elem.actual
+      departure_text: elem.departure_text
+      // actual: elem.actual
     }
   })
 
@@ -88,26 +88,9 @@ const Home = () => {
               <h3 className="stop-name">{getStopsSelection()[stop]}</h3>
               <span className="stop-number"><strong style={{ fontWeight: '600', fontSize: '18px', textAlign: 'center' }}>Stop #:</strong>{stop}</span>
             </StopDescription>
-            <table className="table departures-table">
-              <thead className={'table head'}>
-                <tr>
-                  <th className="route">Route</th>
-                  <th className="destination">Destination</th>
-                  <th className="departs text-right">Departs</th>
-                </tr>
-              </thead>
-              <tbody>
-                {getDepartureData().map(({ description, actual, departure_text }, index) => {
-                  return <tr key={index} indexclassName="departure" style={{ display: 'table-row !important' }}>
-                    <td key={'1'} className="route-number mr-2">{route}</td>
-                    <td key={'2'} className="route-name">{description}</td>
-                    <td key={'3'} className="depart-time ml-auto">
-                      {actual && <StyledWifi />}
-                      <span>{departure_text}</span></td>
-                  </tr>
-                })}
-              </tbody>
-            </table>
+            {
+              <Table data={{ columns: ['ROUTE', 'DESTINATION', 'DEPARTS'], data: getDepartureData() }}></Table>
+            }
 
           </div>
 

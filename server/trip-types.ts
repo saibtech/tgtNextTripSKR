@@ -56,6 +56,8 @@ export class Departure {
 	stop_id: number
 	@Field()
 	trip_id: string
+	@Field()
+	terminal: string
 }
 
 @ObjectType()

@@ -14,6 +14,7 @@ type Departure {
   route_short_name: String
   schedule_relationship: String
   stop_id: Float
+  terminal: String
   trip_id: String
 }
 

@@ -36,6 +36,7 @@ export const DepartureFragment = gql`
         schedule_relationship
         stop_id
         trip_id
+        terminal
     }
 `
 

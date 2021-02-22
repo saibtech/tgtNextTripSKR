@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-babel",
+  "name": "tgtNextTripSKR",
   "version": "0.0.4",
-  "description": "React Webpack Babel Starter Kit",
+  "description": "React Target App",
   "main": "''",
   "engines": {
     "node": "10.12.0"
@@ -18,11 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ReactJSResources/react-webpack-babel"
+    "url": "https://github.com/saibtech/tgtNextTripSKR"
   },
-  "author": "ReactJSResources",
+  "author": "Saikrishna Rengaraj",
   "license": "MIT",
-  "homepage": "https://github.com/ReactJSResources/react-webpack-babel#readme",
+  "homepage": "https://github.com/saibtech/tgtNextTripSKR#readme",
   "dependencies": {
     "@apollo/client": "^3.3.11",
     "@babel/core": "^7.12.3",
